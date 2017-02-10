@@ -1,0 +1,21 @@
+---
+title: "Traffic accidents in Denver (2015,only Sunday)"
+output: html_document
+---
+```{r, echo=FALSE}
+library(leaflet)
+set.seed(10000)
+#df<-data.frame(lat=runif(20,min=39.2,max=39.3),
+#               lng=runif(20,min=-76.6,max=-76.5))
+df<-read.csv("traffic_accidents.csv")
+df$Date<-as.Date(df$FIRST_OCCURRENCE_DATE)
+df$year<-format(df$Date,'%Y')
+final<-data.frame(lat=df$GEO_LAT,lng=df$GEO_LON)
+#r<-sample(1:length(final[,1]),1000)
+final[(df$year=="2012") & (weekdays(df$Date)=="Sunday"),] %>% 
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(clusterOptions=markerClusterOptions()) %>%
+        addCircleMarkers(stroke=TRUE,opacity=0.5,fillOpacity=0.1,radius=3,color="blue")
+        
+```
