@@ -1,0 +1,27 @@
+---
+title: "Week 3 Assignment"
+output:
+  ioslides_presentation: default
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+author: HAN
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R presentation
+We can use R Markdown to create our webpage with Plotly, which is a web application for creating data visualization. Next slide is an example plot using plotly.
+
+## Example plot
+- data: mtcars
+- x=mpg; y=cyl; z=disp
+```{r include=FALSE}
+library(plotly)
+p<-plot_ly(x=mtcars$mpg,y=mtcars$cyl,z=mtcars$disp,type="scatter3d",mode="markers",color=as.factor(mtcars$gear)) 
+```
+
+
+```{r, echo=FALSE, warning=FALSE}
+p
+```
